@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { Route, Switch, useHistory } from "react-router-dom";
+import { Flex } from "@chakra-ui/layout";
+import { useDispatch, useSelector } from "react-redux";
+
+import Login from "./components/auth/Login";
+import Dashboard from "./components/dashboard/Dashboard";
+import Header from "./components/layout/Header";
+import Navbar from "./components/layout/Navbar/index";
 
 function App() {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  // const { currentUser } = useSelector((state) => state.user);
+  useEffect(() => {}, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Flex h="100vh" w="100vw" direction="column">
+      <Header />
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Dashboard} />
+        <Route exact path="/login" component={Login} />
+      </Switch>
+    </Flex>
   );
 }
 
